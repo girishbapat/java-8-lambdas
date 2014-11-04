@@ -20,6 +20,16 @@ import com.core.java8.lambdas.common.Employee;
  */
 public class FunctionalInterfaces {
 
+	private static void getEmpWithMin35(List<Employee> empList,
+			Predicate<Employee> atLeast35) {
+		for (Employee emp : empList) {
+			if (atLeast35.test(emp)) {
+				System.out.println("Name of emp is:" + emp.getFirstName()
+						+ ", age:" + emp.getAge());
+			}
+		}
+	}
+
 	/**
 	 * @param args
 	 */
@@ -45,7 +55,19 @@ public class FunctionalInterfaces {
 		};
 
 		List<Employee> emplst = Employee.getShortList();
+		System.out.println("======Predicate=====");
+		getEmpWithMin35(emplst, atLeast35);
 
+		System.out.println("=====Functional====");
+		for (Employee emp1 : emplst) {
+			System.out.println(getEmployeeWithAge.apply(emp1));
+		}
+		System.out.println("=====Consumer====");
+		for (Employee emp1 : emplst) {
+			printFullName.accept(emp1);
+		}
+		System.out.println("===Supplier===");
+		printFullName.accept(employeeWithNameAndDept.get());
 	}
 
 }
